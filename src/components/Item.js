@@ -1,5 +1,5 @@
 import React from "react";
-import ListToggle from "./ListToggle";
+import ListToggleContainer from "../containers/ListToggleContainer";
 
 function Item(props) {
   debugger;
@@ -10,16 +10,31 @@ function Item(props) {
   } else {
     name = props.movie.name;
   }
-
+  console.log(props.movie);
+  var trailer = "https://www.youtube.com/watch?v=" + props.movie.trailer;
+if(props.movie.trailer != "no-trailer")
   return (
     <div className="Item" style={{backgroundImage: 'url(' + backDrop + ')'}} >
       <div className="overlay">
         <div className="title">{name}</div>
         <div className="rating">{props.movie.vote_average} / 10</div>
         <div className="plot">{props.movie.overview}</div>
-        <ListToggle movie={props.movie}/>
+        <a className="trailer" href={trailer}> Movie Trailer </a>
+        <ListToggleContainer movie={props.movie}/>
       </div>
     </div>
   );
+  else {
+    return (
+      <div className="Item" style={{backgroundImage: 'url(' + backDrop + ')'}} >
+        <div className="overlay">
+          <div className="title">{name}</div>
+          <div className="rating">{props.movie.vote_average} / 10</div>
+          <div className="plot">{props.movie.overview}</div>
+          <ListToggleContainer movie={props.movie}/>
+        </div>
+      </div>
+    );
+  }
 }
 export default Item;
